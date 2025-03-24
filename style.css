@@ -1,31 +1,46 @@
 body {
-     font-family: Arial, sans-serif;
-    background-color: #000000;
-    text-align: center;
-    padding: 20px;
-    color: white;
+   font-family: Arial, sans-serif;
+   background: linear-gradient(#0C0C0C 0%, #481E14 33.33%, #9B3922 66.67%, #F2613F 100%);
+   text-align: center;
+   padding: 295px;
+   color: white;
 }
 
 button {
-   margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #001d30;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 5px;
+  margin: 10px;
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
+   background-color: #020202;
+   color: rgb(160, 44, 44);
+   border: none;
+   border-radius: 5px;
+   
 }
 
 button:hover {
-    background-color: #4e0101;
+   background-color: #4e0101;
 }
 
 #historia {
-    margin-top: 20px;
-    font-size: 18px;
+   margin-top: 20px;
+   font-size: 18px;
 }
 
 #escolha {
-    margin-top: 20px;
+   margin-top: 20px;
+}
+
+.imagem-1 {
+   width: 300px;
+   height: 300px;
+   display: flex;
+   position: absolute;
+}
+
+.imagem-2 {
+   width: 300px;
+   height: 300px;
+   display: flex;
+   position: absolute;
 }
