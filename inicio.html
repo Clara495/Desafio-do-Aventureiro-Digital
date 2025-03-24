@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada Misteriosa - Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SeteAlém</h1>
+        <h2>Bem-vindo ao mundo de SeteAlém.</h2>
+        <p>Você está prestes a embarcar em uma jornada cheia de mistérios e perigos.<br> Escolha com sabedoria, pois cada decisão pode ser a última.</p>
+
+        <p>
+            Você, um estudante de medicina de 24 anos, sempre foi cético em relação 
+            às histórias de terror, especialmente as sobre SeteAlém, um universo paralelo 
+            obscuro. Sua rotina envolvia estudos e um estágio no IML, onde frequentemente 
+            pesquisava casos de SeteAlém com amigos. Em uma terça-feira, enquanto trabalhava 
+            sozinho na sala de autópsia, você se distraiu pensando nas histórias e, ao abrir 
+            uma porta, acabou sendo transportada para esse mundo sombrio.
+        </p>
+        <button id="startGame">Iniciar Jogo</button>
+    </div>
+    
+    <script>
+        document.getElementById("startGame").addEventListener("click", () => {
+            localStorage.setItem("currentStep", "0"); // Reseta o jogo ao iniciar
+            window.location.href = "jogo.html"; // Vai para o jogo
+        });
+    </script>
+</body>
+</html>
