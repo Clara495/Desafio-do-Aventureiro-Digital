@@ -7,6 +7,7 @@ export let vidas = 3;
 // array vazio, representa o inventário do jogador.
 export let inventory = [];
 
+// array de etapas do jogo
 const historia = [
     {
         text: "Você não consegue enxergar nada além da escuridão. O cheiro de mofo e umidade impregna o ar, e o silêncio é perturbador.Seu coração acelera. Há apenas dois caminhos: seguir em frente ou recuar.",
@@ -62,7 +63,7 @@ const historia = [
     },
 
  {
-        // opção 7 - MORTE PORTA
+        // opção 8 - MORTE PORTA
         text: "Você gira a maçaneta e empurra a porta com força. Mas, assim que pisa para fora, o chão desaparece sob seus pés. Você cai em um vazio infinito. Gritos e sussurros invadem sua mente enquanto a escuridão a consome. Você nunca saiu de SeteAlém.",
         choices: ["X"],
         outcomes: ["loseLife"]
@@ -70,8 +71,9 @@ const historia = [
 
 ];
 
-// Atualiza a história na interface
+// Atualiza a história 
 export function update() {
+    // elementos HTML onde serão exibidos a história, as escolhas e a contagem de vidas.
     const historiaDiv = document.getElementById("historia");
     const escDiv = document.getElementById("escolha");
     const vidaSpan = document.getElementById("vidas");
@@ -94,49 +96,52 @@ export function update() {
 function handleEscolha(escIndex) {
     const outcome = historia[etapaAtual].outcomes[escIndex];
 
+    // verifica de a escolha feita pelo jogador é morte, se for ele perde -1 vida
     if (outcome === "loseLife") {
         vidas--; // Perde 1 vida
         localStorage.setItem("vidas", vidas); // Salva no localStorage
+        // verifica se as vidas acabaram, se sim então é gamer over e o jogo reinicia com as vidas completa
         if (vidas <= 0) {
             gameOver(); 
             return;
         }
+
+        // alerta para informar que o jogador perdeu 1 vida
         alert("Você caiu na armadilha de SeteAlém. Você perdeu 1 vida!");
         etapaAtual = 0;  // Volta para o início
 
-    } else if (outcome === "restart") {
-        resetGame();
-        
-        return;
+    // verifica se a opção selecionada é para voltar ao inicio do jogo. Opção que aparece quando o jogador ganha
     } else if (outcome === "home") {
-        window.location.href = "inicio.html";
+        window.location.href = "inicio.html"; // direciona ao inicio
         return;
     } else {
-        etapaAtual = outcome;
+        etapaAtual = outcome; // Avança para a próxima etapa
         localStorage.setItem("etapaAtual", etapaAtual); // Salva progresso
     }
 
     update();  
 }
+
 // Função de game over
 function gameOver() {
+    // elemento HTML onde o texto da história e opções de escolha será exibido
     const historiaDiv = document.getElementById("historia");
     const escDiv = document.getElementById("escolha");
 
-    historiaDiv.textContent = "GAME OVER! Você perdeu todas as suas vidas! 💀";
-    escDiv.innerHTML = "";
+    historiaDiv.textContent = "GAME OVER! Você perdeu todas as suas vidas! 💀"; // Define o texto da história para exibir a mensagem de "GAME OVER"
+    escDiv.innerHTML = ""; // Remove as opções anteriores
 
-    const restartButton = document.createElement("button");
-    restartButton.textContent = "Reiniciar Jogo";
-    restartButton.onclick = resetGame;
-    escDiv.appendChild(restartButton);
+    const restartButton = document.createElement("button"); // Cria um novo botão para reiniciar o jogo
+    restartButton.textContent = "Reiniciar Jogo"; // Define o texto do botão
+    restartButton.onclick = resetGame; // Adiciona um evento ao botão: quando clicado, ele chamará a função resetGame
+    escDiv.appendChild(restartButton); // Adiciona o botão de reiniciar ao elemento que exibe as escolhas do jogador
     
 }
 
 // Função de reiniciar o jogo
 function resetGame() {
-    etapaAtual = 0;
-    vidas = 3;
-    inventory = [];
+    etapaAtual = 0; // Reinicia para a primeira etapa
+    vidas = 3; // Restaura as 3 vidas
+    inventory = []; // Limpa o inventário do jogador
     update();  // Atualiza a interface com o início do jogo
 }
