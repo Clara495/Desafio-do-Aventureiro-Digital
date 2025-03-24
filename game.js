@@ -1,8 +1,13 @@
-export let currentStep = localStorage.getItem("currentStep") ? parseInt(localStorage.getItem("currentStep")) : 0;
-export let lives = 3;
+// VARIAVEL etapa atual do jogo. 
+//Se houver um valor armazenado no localStorage com a chave "currentStep", ele será recuperado, convertido para número (parseInt()) e usado.
+//Se não houver valor armazenado, currentStep será inicializado com 0.
+export let etapaAtual = localStorage.getItem("etapaAtual") ? parseInt(localStorage.getItem("etapaAtual")) : 0;
+// VARIAVEL número de vidas
+export let vidas = 3;
+// array vazio, representa o inventário do jogador.
 export let inventory = [];
 
-const story = [
+const historia = [
     {
         text: "Você não consegue enxergar nada além da escuridão. O cheiro de mofo e umidade impregna o ar, e o silêncio é perturbador.Seu coração acelera. Há apenas dois caminhos: seguir em frente ou recuar.",
 
@@ -66,38 +71,38 @@ const story = [
 ];
 
 // Atualiza a história na interface
-export function updateStory() {
-    const storyDiv = document.getElementById("story");
-    const choicesDiv = document.getElementById("choices");
-    const livesSpan = document.getElementById("lives");
+export function update() {
+    const historiaDiv = document.getElementById("historia");
+    const escDiv = document.getElementById("escolha");
+    const vidaSpan = document.getElementById("lives");
 
     // Atualiza o texto da história
-    storyDiv.textContent = story[currentStep].text;
-    choicesDiv.innerHTML = "";  // Limpa as escolhas antigas
-    livesSpan.textContent = lives; // Exibe as vidas atuais
+    historiaDiv.textContent = historia[etapaAtual].text;
+    escDiv.innerHTML = "";  // Limpa as escolhas antigas
+    vidaSpan.textContent = vidas; // Exibe as vidas atuais
 
     // Cria botões para as escolhas
-    story[currentStep].choices.forEach((choice, index) => {
+    historia[etapaAtual].choices.forEach((esc, index) => {
         const button = document.createElement("button");
-        button.textContent = choice;
-        button.onclick = () => handleChoice(index);
-        choicesDiv.appendChild(button);
+        button.textContent = esc;
+        button.onclick = () => handleEscolha(index);
+        escDiv.appendChild(button);
     });
 }
 
 // Lida com a escolha feita pelo jogador
-function handleChoice(choiceIndex) {
-    const outcome = story[currentStep].outcomes[choiceIndex];
+function handleEscolha(escIndex) {
+    const outcome = historia[etapaAtual].outcomes[escIndex];
 
     if (outcome === "loseLife") {
-        lives--; // Perde 1 vida
-        localStorage.setItem("lives", lives); // Salva no localStorage
-        if (lives <= 0) {
+        vidas--; // Perde 1 vida
+        localStorage.setItem("vidas", vidas); // Salva no localStorage
+        if (vidas <= 0) {
             gameOver(); 
             return;
         }
         alert("Você caiu na armadilha de SeteAlém. Você perdeu 1 vida!");
-        currentStep = 0;  // Volta para o início
+        etapaAtual = 0;  // Volta para o início
 
     } else if (outcome === "restart") {
         resetGame();
@@ -107,31 +112,31 @@ function handleChoice(choiceIndex) {
         window.location.href = "inicio.html";
         return;
     } else {
-        currentStep = outcome;
-        localStorage.setItem("currentStep", currentStep); // Salva progresso
+        etapaAtual = outcome;
+        localStorage.setItem("etapaAtual", etapaAtual); // Salva progresso
     }
 
-    updateStory();  
+    update();  
 }
 // Função de game over
 function gameOver() {
-    const storyDiv = document.getElementById("story");
-    const choicesDiv = document.getElementById("choices");
+    const historiaDiv = document.getElementById("historia");
+    const escDiv = document.getElementById("escolha");
 
-    storyDiv.textContent = "GAME OVER! Você perdeu todas as suas vidas! 💀";
-    choicesDiv.innerHTML = "";
+    historiaDiv.textContent = "GAME OVER! Você perdeu todas as suas vidas! 💀";
+    escDiv.innerHTML = "";
 
     const restartButton = document.createElement("button");
     restartButton.textContent = "Reiniciar Jogo";
     restartButton.onclick = resetGame;
-    choicesDiv.appendChild(restartButton);
+    escDiv.appendChild(restartButton);
     
 }
 
 // Função de reiniciar o jogo
 function resetGame() {
-    currentStep = 0;
-    lives = 3;
+    etapaAtual = 0;
+    vidas = 3;
     inventory = [];
-    updateStory();  // Atualiza a interface com o início do jogo
+    update();  // Atualiza a interface com o início do jogo
 }
