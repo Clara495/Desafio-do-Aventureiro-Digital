@@ -74,7 +74,7 @@ const historia = [
 export function update() {
     const historiaDiv = document.getElementById("historia");
     const escDiv = document.getElementById("escolha");
-    const vidaSpan = document.getElementById("lives");
+    const vidaSpan = document.getElementById("vidas");
 
     // Atualiza o texto da história
     historiaDiv.textContent = historia[etapaAtual].text;
