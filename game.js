@@ -57,15 +57,15 @@ const historia = [
 
  {
         // opção 7 - MORTE MONSTRO
-        text: "Senhor, você está bem? você pergunta. A figura se move lentamente. Seu pescoço vira em um ângulo impossível, revelando um rosto desfigurado, olhos vazios e um sorriso macabro. Antes que possa reagir, a coisa se lança sobre você, suas mãos podres agarram seu rosto e a escuridão toma conta. Você não consegue gritar. Você foi tomada por SeteAlém.",
-        choices: ["X"],
+        text: "Senhor, você está bem? você pergunta. A figura se move lentamente. Seu pescoço vira em um ângulo impossível, revelando um rosto desfigurado, olhos vazios e um sorriso macabro. Antes que possa reagir, a coisa se lança sobre você, suas mãos podres agarram seu rosto e a escuridão toma conta. Você não consegue gritar. Você foi tomada por SeteAlém. ",
+        choices: ["Você perdeu! X"],
         outcomes: ["loseLife"]
     },
 
  {
         // opção 8 - MORTE PORTA
         text: "Você gira a maçaneta e empurra a porta com força. Mas, assim que pisa para fora, o chão desaparece sob seus pés. Você cai em um vazio infinito. Gritos e sussurros invadem sua mente enquanto a escuridão a consome. Você nunca saiu de SeteAlém.",
-        choices: ["X"],
+        choices: ["Você perdeu! X"],
         outcomes: ["loseLife"]
     },
 
